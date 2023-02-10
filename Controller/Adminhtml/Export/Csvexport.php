@@ -63,9 +63,11 @@ class Csvexport extends \Magento\Backend\App\Action
         foreach ($product['items'] as $key) {
 
             $product = $objectManager->create('Magento\Catalog\Model\Product')->load($key['entity_id']);
-            $product_error = json_decode($product->getData('fruugo_validation_errors'), true);
-            if (isset($product_error['0']['errors']))
-                $arr[] = ['entity_id' => $key['entity_id'], 'sku' => $key['sku'], 'error' => json_encode($product_error['0']['errors'])];
+            if(!empty($product->getData('fruugo_validation_errors'))) {
+                $product_error = json_decode($product->getData('fruugo_validation_errors'), true);
+                if (isset($product_error['0']['errors']))
+                    $arr[] = ['entity_id' => $key['entity_id'], 'sku' => $key['sku'], 'error' => json_encode($product_error['0']['errors'])];
+            }
         }
 if(!isset($arr)){
     $arr[] = ['entity_id' => '1', 'sku' => 'SAMPLE', 'error' => 'SAMPLE'];

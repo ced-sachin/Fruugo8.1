@@ -1369,6 +1369,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 if(file_exists($path['path'] . '/' . 'MPProduct.xml')) {
                     $fileContent = file_get_contents($path['path'] . '/' . 'MPProduct.xml');
                 }
+                $preSkus =
                 $oldProducts = $this->xml->loadXml($fileContent)->xmlToArray();
 
                 $newProducts = $this->session->getResponseSession();
@@ -1487,9 +1488,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $response = $this->getRequest('stockstatus-api' . $queryString);
         $api_hit = 0;
         $response = $this->xml->loadXML($response)->xmlToArray();
-        $pages = 0;
-        if(isset($response['skus']['_attribute']['numberOfPages'])){
-            $pages = (int)$response['skus']['_attribute']['numberOfPages'];
+        $pages = 0;	
+        if(isset($response['skus']['_attribute']['numberOfPages'])) {	
+            $pages = (int)$response['skus']['_attribute']['numberOfPages'];	
         }
         $page_no = 0;
         $api_response = '';
@@ -1634,7 +1635,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return $api_response;
             }
      }
-   }
+    }
 
     public function getProductQty($productId,$childId){
         if(is_object($productId))
@@ -2117,7 +2118,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     $configurableProductObject->setFruugoProductValidation('Invalid');
                     $configurableProductObject->getResource()->saveAttribute($configurableProductObject,'fruugo_validation_errors')->saveAttribute($configurableProductObject,'fruugo_product_validation');
                 } else {
-                    $configurableProductObject->setFruugoValidationErrors(NULL);
+                    $configurableProductObject->setData('fruugo_validation_errors',' ');
                     $configurableProductObject->setFruugoProductValidation('Valid');
                     $configurableProductObject->getResource()->saveAttribute($configurableProductObject,'fruugo_product_validation')->saveAttribute($configurableProductObject,'fruugo_validation_errors');
                 }
@@ -2327,7 +2328,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 $product->setData('fruugo_product_validation', 'Invalid');
             } else {               
                 $product->setData('fruugo_product_validation', 'Valid');
-                $product->setData('fruugo_validation_errors', NULL);
+                $product->setData('fruugo_validation_errors', ' ');
                 $validatedProduct['id'] = $id;
                 $validatedProduct['category'] = $category;
             }
