@@ -479,19 +479,21 @@ class Configuration extends \Magento\Config\Block\System\Config\Form
     {
     	$pcode =$this->getRequest()->getParam('pcode');
     	
-    	if(strlen($pcode)>0)
-    	{
-    		/* print_r($this->_scopeConfig->getValue($gcode.'/'.$path, $this->getScope(), $this->getScopeCode()));
-    		die; */
-    		return $this->_scopeConfig->getValue($pcode.'/'.$path, $this->getScope(), $this->getScopeCode());
-    	}
-    	else 
-    	{
-    		/* print_r($this->_scopeConfig->getValue($path, $this->getScope(), $this->getScopeCode()));
-    		die('zzzz'); */
-    		return $this->_scopeConfig->getValue($path, $this->getScope(), $this->getScopeCode());
-    		//die;
-    	}
+    	if($pcode) {
+            if(strlen($pcode)>0)
+            {
+                /* print_r($this->_scopeConfig->getValue($gcode.'/'.$path, $this->getScope(), $this->getScopeCode()));
+                die; */
+                return $this->_scopeConfig->getValue($pcode.'/'.$path, $this->getScope(), $this->getScopeCode());
+            }
+            else 
+            {
+                /* print_r($this->_scopeConfig->getValue($path, $this->getScope(), $this->getScopeCode()));
+                die('zzzz'); */
+                return $this->_scopeConfig->getValue($path, $this->getScope(), $this->getScopeCode());
+                //die;
+            }
+        }
     	//die;
     }
 
@@ -562,18 +564,20 @@ class Configuration extends \Magento\Config\Block\System\Config\Form
     {
         $pcode =$this->getRequest()->getParam('pcode');
     	 
-    	if(strlen($pcode)>0)
-    	{
-    		$data= $this->_scopeConfig->getValue($pcode.'/'.$path, $this->getScope(), $this->getScopeCode());
-    		if($data!='')
-    		{
-    			return false;
-    		}
-    		else
-    		{
-    			return true;
-    		}
-    	}
+    	if($pcode) { 
+            if(strlen($pcode)>0)
+            {
+                $data= $this->_scopeConfig->getValue($pcode.'/'.$path, $this->getScope(), $this->getScopeCode());
+                if($data!='')
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
     	return true;
     
     }
