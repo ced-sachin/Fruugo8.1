@@ -385,7 +385,7 @@ class Fruugo extends \Magento\Framework\App\Helper\AbstractHelper
      * @param string $configPrice
      * @return float|null
      */
-    public function forPerPrice($configPrice , $price = null, $percentPrice = null)
+    public function forPerPrice($price = null, $percentPrice = null, $configPrice = null)
     {
         if (is_numeric($percentPrice)) {
             $percentPrice =(float)$percentPrice;
