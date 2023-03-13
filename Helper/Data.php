@@ -1280,6 +1280,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     $stock = $stockRegistry->getStockItem($product->getId (), $product->getStore ()->getWebsiteId ());
 
                     //print_r($stock->getId()); die(__DIR__);
+                    
+                    $fruugo_desc_tags = $this->scopeConfigManager->getValue('fruugoconfiguration/product_edit/fruugo_config_tags');
+                    
+                    if($fruugo_desc_tags == 0) {
+                        $attrValueArray['Description'] = strip_tags(html_entity_decode($attrValueArray['Description']));
+                    }
 
 
                     $productToUpload[$uploadType] = [
